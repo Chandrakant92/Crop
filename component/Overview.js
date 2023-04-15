@@ -10,7 +10,7 @@ import * as MediaLibrary from 'expo-media-library';
 
 
 
-const Home = ({ navigation }) => {
+const Overview = ({ navigation }) => {
 
     const createButtonAlert = () =>
         Alert.alert('Alert Title', 'My Alert Msg', [
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Home
+export default Overview;

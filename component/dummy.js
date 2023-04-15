@@ -6,6 +6,54 @@ import * as MediaLibrary from 'expo-media-library';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const Dummy = () => {
+
+// image url using cloudnary
+
+const [E_Pic, setpic] = useState("");
+
+const OnChangeHandler = (e) => {
+  setEvent({ ...Event, [e.target.name]: e.target.value })
+}
+
+const PostDetail = (pics) => {
+  setpicloading(true);
+  if (pics === undefined) {
+    alert("please select a single image")
+    setpicloading(false);
+    return 
+    
+  }
+
+  if (pics.type === "image/jpeg" || pics.type === "image/png") {
+    const data = new FormData();
+    data.append("file", pics)
+    data.append("upload_preset", "chat-app");
+    data.append("cloud_name", "dnixu4d4g");
+    fetch("https://api.cloudinary.com/v1_1/dnixu4d4g/image/upload", {
+      method: "post",
+      body:data
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setpic(data.url.toString())
+        console.log(data.url.toString())
+        
+        alert("pic uploaded successfully")
+      }).catch((err) => {
+       
+        console("unable to upload pic")
+    })
+  } else {
+    
+    alert("Select the proper image extension eg:png/jpeg")
+  }
+  
+}
+
+
+// Rider
+
+
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [photoUri, setPhotoUri] = useState(null);
@@ -30,8 +78,12 @@ const Dummy = () => {
   };
 
   const savePhotoToCameraRoll = async (photoUri) => {
-    const asset = await MediaLibrary.createAssetAsync(photoUri);
+    try {
+      const asset = await MediaLibrary.createAssetAsync(photoUri);
     await MediaLibrary.createAlbumAsync('Expo', asset, false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (hasPermission === null) {
