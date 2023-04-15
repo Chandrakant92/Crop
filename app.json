@@ -1,5 +1,6 @@
 {
   "expo": {
+    "plugins": ["expo-camera"],
     "name": "FirstProject",
     "slug": "FirstProject",
     "version": "1.0.0",
