@@ -11,9 +11,9 @@ const Dummy = () => {
 
 const [E_Pic, setpic] = useState("");
 
-const OnChangeHandler = (e) => {
-  setEvent({ ...Event, [e.target.name]: e.target.value })
-}
+// const OnChangeHandler = (e) => {
+//   setEvent({ ...Event, [e.target.name]: e.target.value })
+// }
 
 const PostDetail = (pics) => {
   setpicloading(true);
@@ -53,7 +53,6 @@ const PostDetail = (pics) => {
 
 // Rider
 
-
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [photoUri, setPhotoUri] = useState(null);
@@ -71,7 +70,9 @@ const PostDetail = (pics) => {
     if (cameraRef.current) {
       const { uri } = await cameraRef.current.takePictureAsync();
       setPhotoUri(uri);
-      console.log(uri);
+      // console.log("==============================");
+      // console.log(uri);
+      // console.log("==============================");
       savePhotoToCameraRoll(uri);
       navigation.navigate('ImagePage', { photoUri: uri });
     }
